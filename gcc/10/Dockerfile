@@ -7,10 +7,10 @@ RUN apt-get update && \
         openssh-client \
         procps \
         build-essential \
-        gcc \
-        g++ \
-        gcc-multilib \
-        g++-multilib \
+        gcc-10 \
+        g++-10 \
+        gcc-10-multilib \
+        g++-10-multilib \
         autoconf \
         automake \
         libtool \
@@ -21,5 +21,12 @@ RUN apt-get update && \
         subversion \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
+
+RUN    update-alternatives --install /usr/bin/gcc    gcc    /usr/bin/gcc-9     10 \
+    && update-alternatives --install /usr/bin/gcc    gcc    /usr/bin/gcc-10    20 \
+    && update-alternatives --install /usr/bin/g++    g++    /usr/bin/g++-9     10 \
+    && update-alternatives --install /usr/bin/g++    g++    /usr/bin/g++-10    20 \
+    && update-alternatives --install /usr/bin/gcc-ar gcc-ar /usr/bin/gcc-ar-9  10 \
+    && update-alternatives --install /usr/bin/gcc-ar gcc-ar /usr/bin/gcc-ar-10 20
 
 WORKDIR /data
