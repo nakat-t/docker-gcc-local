@@ -1,6 +1,4 @@
-FROM ubuntu:18.04
-LABEL maintainer="nakat-t <armaiti.wizard@gmail.com>" \
-      description="My local gcc-9 image."
+FROM ubuntu:18.04 as base
 
 RUN apt-get update \
     && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends software-properties-common \
@@ -32,3 +30,11 @@ RUN    update-alternatives --install /usr/bin/gcc    gcc    /usr/bin/gcc-7    10
     && update-alternatives --install /usr/bin/gcc-ar gcc-ar /usr/bin/gcc-ar-9 20
 
 WORKDIR /data
+
+FROM base as test
+COPY run_tests.sh /
+RUN chmod +x /run_tests.sh
+
+FROM base as release
+LABEL maintainer="nakat-t <armaiti.wizard@gmail.com>" \
+      description="My local gcc-9 image."

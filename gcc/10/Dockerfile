@@ -1,6 +1,4 @@
-FROM ubuntu:20.04
-LABEL maintainer="nakat-t <armaiti.wizard@gmail.com>" \
-      description="My local gcc-10 image."
+FROM ubuntu:20.04 as base
 
 RUN apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
@@ -30,3 +28,11 @@ RUN    update-alternatives --install /usr/bin/gcc    gcc    /usr/bin/gcc-9     1
     && update-alternatives --install /usr/bin/gcc-ar gcc-ar /usr/bin/gcc-ar-10 20
 
 WORKDIR /data
+
+FROM base as test
+COPY run_tests.sh /
+RUN chmod +x /run_tests.sh
+
+FROM base as release
+LABEL maintainer="nakat-t <armaiti.wizard@gmail.com>" \
+      description="My local gcc-10 image."
