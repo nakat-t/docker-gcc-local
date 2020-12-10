@@ -7,10 +7,11 @@
 * `6`
 * `5`
 * `4.9`
+* `4.8`
 
 # Introduction
 
-A personal docker image for C/C++ builds with clang and some software added.
+A personal docker image for C/C++ builds with gcc and some software added.
 
 # How to use this image
 
