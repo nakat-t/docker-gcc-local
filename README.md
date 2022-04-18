@@ -1,6 +1,7 @@
 # Supported tags
 
-* `latest`, `10`
+* `latest`, `11`
+* `10`
 * `9`
 * `8`
 * `7`
